@@ -24,6 +24,9 @@ const requestListener = function (req, res){
     }
 };
 
+// Tehtävää lisätty "default" siltä varalta jos yrittää testailla jollain muulla osoitteella. 
+// Ei välttämätön, mutta vaikutti "standardilta", joten pukkasin mukaan
+
 const server = http.createServer(requestListener);
 server.listen(port, host, () =>{
     console.log('Server is RUNNING!')

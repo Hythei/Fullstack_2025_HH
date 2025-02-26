@@ -1,1 +1,5 @@
-WS02b/node_modules/
+# Dependencies
+node_modules/
+
+# Environment Variables
+.env

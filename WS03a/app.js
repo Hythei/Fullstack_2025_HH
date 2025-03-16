@@ -5,6 +5,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const fs = require('fs');
 app.use(express.static('./public'));
+app.use(express.json());
 
 
 //ex 4, ennen reittejä, jottei tule pyyntöjen kanssa ongelmia.
@@ -70,6 +71,11 @@ app.get('/api/json', (req, res) => {
 app.get('/json', (req, res) =>{
     res.sendFile(path.join(__dirname, 'public', 'JSON_data.html'));
 });
+
+app
+
+
+
 
 app.get("*", (req, res) => {
     res.status(404).send("Cannot find the requested page.")

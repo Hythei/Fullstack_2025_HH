@@ -23,5 +23,10 @@
     "Name": "Example5",
     "Address": "Street5",
     "Date of Birth": "Birth5"
+  },
+  {
+    "Name": "New Example",
+    "Address": "New Street",
+    "Date of Birth": "New Birth"
   }
 ]

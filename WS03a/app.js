@@ -106,6 +106,8 @@ app.post('/add', (req, res) =>{
                     console.error('Error writing to the JSON file, yay:', writeErr);
                     return res.status(500).send('Error writing to the JSON file');
                 }
+
+                res.status(200).json({success: true, message: 'Data kirjoitettu'});
             });
         } catch (parseErr){
             console.error('Error JSON parsinnan kanssa:', parseErr);
@@ -113,7 +115,7 @@ app.post('/add', (req, res) =>{
         }
     });
 });
-//Testattu Postmanilla ja välillä toimii, mutta välilä luo tyhjän ohjektin. Jatkan tutkimista.
+//Testattu Postmanilla ja toimii hyvin kun valitsee body -> raw, JSON.
 
 
 app.get("*", (req, res) => {

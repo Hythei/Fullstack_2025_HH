@@ -4,20 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
+    <link rel="stylesheet" type= "text/css" href="style.css">
 </head>
 <body>
-    <%- include("partials/header") %>
+    
     <main>
-        
-        <h1><%= message %></h1>
-        <ul>
-            <% data.items.forEach((item) =>{%>
-                <li>
-                    <%=item%>
-                </li>
-                <%});%>
-        </ul>
+    <%- include("partials/header") %>
+        <div class = "task_Div" id = "item_Iteration">
+            <h1><%= message %></h1>
+            <ul>
+                <% data.items.forEach((item) =>{%>
+                    <li>
+                        <%=item%>
+                    </li>
+                    <%});%>
+            </ul>
+        </div>
+        <div class = "task_Div" id = "boolean_Thing">
+            <h1>The following contents will depend on the boolean's value</h1>
+            <% if (boolean) {%>
+                <h1 id = "bool_True">The Boolean is True</h1>
+            <% } else { %>
+                <h1 id = "bool_False">The Boolean is False</h1>
+            <% } %>
+        </div>
+    <%- include("partials/footer") %>   
     </main>
-    <%- include("partials/footer") %>
 </body>
 </html>

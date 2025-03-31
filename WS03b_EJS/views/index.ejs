@@ -28,6 +28,14 @@
                 <h1 id = "bool_False">The Boolean is False</h1>
             <% } %>
         </div>
+        <div>
+            <h1>Passing through an array of objects</h1>
+            <ul>
+                <% users.forEach(user => { %>
+                    <li>Name: <%= user.name %> Age: <%= user.age %> ID: <%= user.id  %> </li>
+                <% }); %>
+            </ul>
+        </div>
     <%- include("partials/footer") %>   
     </main>
 </body>

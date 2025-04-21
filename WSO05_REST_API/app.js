@@ -1,4 +1,3 @@
-
 // This is the main entry point for the application
 // It sets up the server, connects to the database, and imports the routes
 // It also starts the server and listens for incoming requests
@@ -11,18 +10,18 @@
 // It connects to the MongoDB database using the URI defined in the environment variable
 // It uses the 'local_library' database for the application
 
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-require('dotenv').config();
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const uri = process.env.MONGODB_URI
+const uri = process.env.MONGODB_URI;
 
 // Import the routes
-const opiskelijaRoutes = require('./routes/opiskelijaRoutes');
+const opiskelijaRoutes = require("./routes/opiskelijaRoutes");
 
 // Middleware
 app.use(bodyParser.json());
@@ -30,10 +29,17 @@ app.use(bodyParser.json());
 // app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // MongoDB Connection
-mongoose.connect(uri);
+mongoose
+  .connect(uri)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
 
 // Use the routes
-app.use('/api', opiskelijaRoutes);
+app.use("/api", opiskelijaRoutes);
 
 // Start Server
 app.listen(PORT, () => {

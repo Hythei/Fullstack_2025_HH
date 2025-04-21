@@ -19,13 +19,15 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const uri = process.env.MONGODB_URI + "local_library";
+const uri = process.env.MONGODB_URI
 
 // Import the routes
 const opiskelijaRoutes = require('./routes/opiskelijaRoutes');
 
 // Middleware
 app.use(bodyParser.json());
+// app.use(express.json()); // Parse JSON bodies
+// app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // MongoDB Connection
 mongoose.connect(uri);

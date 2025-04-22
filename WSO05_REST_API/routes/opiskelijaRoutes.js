@@ -69,7 +69,14 @@ router.patch("/update/:id", async (req, res) => {
 
 // DELETE a document by ID
 router.delete("/delete/:id", async (req, res) => {
-  res.status(200).json({ message: "DELETE request received" });
+  try {
+    const id = req.params.id;
+    const data = await Opiskelija.findByIdAndDelete(id);
+    res.send(`Document ${data._id}:${data.name} has been deleted.`);
+  }
+  catch (error){
+    res.status(500).json({ error: error.message});
+  }
 });
 
 module.exports = router;

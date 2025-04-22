@@ -49,7 +49,22 @@ router.post("/add", async (req, res) => {
 
 // PATCH (update) a document by ID
 router.patch("/update/:id", async (req, res) => {
-  res.status(200).json({ message: "PATCH request received" });
+  try {
+    const id = req.params.id;
+    const updatedData = req.body;
+    const options = { new: true }; // Return the updated document
+    const result = await Opiskelija.findByIdAndUpdate(id, updatedData, options);
+    if (!result) {
+      return res.status(404).json({ error: "Opiskelija not found" });
+    }
+    res.status(200).json({
+      success: true,
+      message: "Update successful",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 // DELETE a document by ID

@@ -18,7 +18,7 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI + "local_library";
 
 // Import the routes
 const opiskelijaRoutes = require("./routes/opiskelijaRoutes");

@@ -1,5 +1,7 @@
 const express = require("express");
 const Opiskelija = require("../models/opiskelija");
+const mongoose = require("mongoose");
+const { validateObjectId, validateOpiskelijaData } = require("../middleware/validator");
 
 const router = express.Router();
 
@@ -15,7 +17,7 @@ router.get("/getall", async (req, res) => {
 });
 
 // GET a single document by ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", validateObjectId, async (req, res) => {
   try {
     const opiskelija = await Opiskelija.findById(req.params.id);
     if (!opiskelija) {
@@ -28,13 +30,14 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST a new document
-router.post("/add", async (req, res) => {
+router.post("/add", validateOpiskelijaData, async (req, res) => {
   const newData = new Opiskelija({
     name: req.body.name,
     email: req.body.email,
     age: req.body.age,
     group: req.body.group,
   });
+
   try {
     const dataToSave = await newData.save();
     res.status(201).json({
@@ -48,11 +51,11 @@ router.post("/add", async (req, res) => {
 });
 
 // PATCH (update) a document by ID
-router.patch("/update/:id", async (req, res) => {
+router.patch("/update/:id", validateObjectId, async (req, res) => {
   try {
     const id = req.params.id;
     const updatedData = req.body;
-    const options = { new: true }; // Return the updated document
+    const options = { new: true };
     const result = await Opiskelija.findByIdAndUpdate(id, updatedData, options);
     if (!result) {
       return res.status(404).json({ error: "Opiskelija not found" });
@@ -68,7 +71,7 @@ router.patch("/update/:id", async (req, res) => {
 });
 
 // DELETE a document by ID
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", validateObjectId, async (req, res) => {
   try {
     const id = req.params.id;
     const data = await Opiskelija.findByIdAndDelete(id);
